@@ -1,6 +1,6 @@
-const express = require("express")
+const express = require("express");
 
-const app = express ()
+const app = express()
 
 const cors = require ("cors")
 
@@ -64,6 +64,22 @@ app.get ("/api/pets/delete/:id", (request, response, next) => {
         statusCode: 200
     })
 })
+
+app.get ("/api/donation/create/:new", (request, response, next) => {
+    response.status (200).json ({
+        success: {message: "this will update pet"},
+        statusCode: 200
+    })
+})
+
+app.get ("/api/donation/update/:id", (request, response, next) => {
+    response.status (200).json ({
+        success: {message: "this will update pet"},
+        statusCode: 200
+    })
+})
+
+
 
 app.listen (PORT, () => {
     console.log (`this server is listening on port ${PORT}`)
