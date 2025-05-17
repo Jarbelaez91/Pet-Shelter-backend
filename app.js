@@ -65,20 +65,40 @@ app.get ("/api/pets/delete/:id", (request, response, next) => {
     })
 })
 
+app.get ("/api/donation", (request, response, next) => {
+    response.status (200).json ({
+        success: {message: "this will send all of the donation data"},
+        statusCode: 200
+    })
+})
+
+app.get ("/api/donation/:id", (request, response, next) => {
+    response.status (200).json ({
+        success: {message: "this will send a single donation by its id"},
+        statusCode: 200
+    })
+})
+
 app.get ("/api/donation/create/:new", (request, response, next) => {
     response.status (200).json ({
-        success: {message: "this will update pet"},
+        success: {message: "this will create donation"},
         statusCode: 200
     })
 })
 
 app.get ("/api/donation/update/:id", (request, response, next) => {
     response.status (200).json ({
-        success: {message: "this will update pet"},
+        success: {message: "this will update donations"},
         statusCode: 200
     })
 })
 
+app.get ("/api/donation/delete/:id", (request, response, next) => {
+    response.status (200).json ({
+        success: {message: "this will delete donations"},
+        statusCode: 200
+    })
+})
 
 
 app.listen (PORT, () => {
