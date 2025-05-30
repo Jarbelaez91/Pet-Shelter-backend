@@ -10,6 +10,8 @@ const helmet = require ("helmet")
 
 const path = require ("node:path")
 
+const petRoutes = require ("./routes/petRoutes")
+
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
@@ -29,76 +31,9 @@ app.get ("/", (request, response, next) => {
     })
 })
 
-app.get ("/api/pets", (request, response, next) => {
-    response.status (200).json ({
-        success: {message: "this will send all of the pets data"},
-        statusCode: 200
-    })
-})
-
-app.get ("/api/pets/:id", (request, response, next) => {
-    response.status (200).json ({
-        success: {message: "this will send a single pet by its id"},
-        statusCode: 200
-    })
-})
 
 
-app.get ("/api/pets/create/new", (request, response, next) => {
-    response.status (200).json ({
-        success: {message: "this will create a new pet for adoption"},
-        statusCode: 200
-    })
-})
-
-app.get ("/api/pets/update/:id", (request, response, next) => {
-    response.status (200).json ({
-        success: {message: "this will update pet"},
-        statusCode: 200
-    })
-})
-
-app.get ("/api/pets/delete/:id", (request, response, next) => {
-    response.status (200).json ({
-        success: {message: "This will delete a book by its id"},
-        statusCode: 200
-    })
-})
-
-app.get ("/api/donation", (request, response, next) => {
-    response.status (200).json ({
-        success: {message: "this will send all of the donation data"},
-        statusCode: 200
-    })
-})
-
-app.get ("/api/donation/:id", (request, response, next) => {
-    response.status (200).json ({
-        success: {message: "this will send a single donation by its id"},
-        statusCode: 200
-    })
-})
-
-app.get ("/api/donation/create/:new", (request, response, next) => {
-    response.status (200).json ({
-        success: {message: "this will create donation"},
-        statusCode: 200
-    })
-})
-
-app.get ("/api/donation/update/:id", (request, response, next) => {
-    response.status (200).json ({
-        success: {message: "this will update donations"},
-        statusCode: 200
-    })
-})
-
-app.get ("/api/donation/delete/:id", (request, response, next) => {
-    response.status (200).json ({
-        success: {message: "this will delete donations"},
-        statusCode: 200
-    })
-})
+app.use("/api/pets", petRoutes);
 
 
 app.listen (PORT, () => {
