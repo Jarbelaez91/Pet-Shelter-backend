@@ -1,4 +1,4 @@
-const petsData = require ("..data/pets.js")
+const petsData = require ("../data/pets.js")
 
 const getAllPets = async (req, res, next) => {
 
@@ -7,7 +7,7 @@ const getAllPets = async (req, res, next) => {
         return res.status (200).json ({
             success: {message: "This route points to all the pets"},
             data: {pets},
-            statsCode:200,
+            statusCode:200,
         }) 
     } catch (error) {
         return res.status (400).json ({
@@ -21,7 +21,7 @@ const getPet = async (req,res,next) => {
     const {id} = req.params
 
     try{
-        const pet = petsData.find ((pet) => pet.id === id )
+        const pet = petsData.find ((pet) => pet._id === Number(id))
         return res.status (200).json ({
             success: {message: "Pet found"},
             data: {pet},
@@ -36,7 +36,7 @@ const getPet = async (req,res,next) => {
 }
 
 const createPet = async (req,res,next) => {
-    const {name,species,age,image} = request.body
+    const {name,species,age,image} = req.body
 
     const newPet = {
         name,
@@ -47,22 +47,22 @@ const createPet = async (req,res,next) => {
     try {
         petsData.push(newPet)
 
-        return response.status(201).json ({
+        return res.status(201).json ({
             success: {message: "a new pet was created"},
             data: {newPet},
-            statsCode: 201
+            statusCode: 201
         })
     } catch (error) {
-        return response.status(400).json({
+        return res.status(400).json({
         error: {message: "there was an error when creating a book"},
-        statsCode: 400
+        statusCode: 400
         })
     }
 }
 
-const updatePet = async (request, response, next) => {
-    const {id} = request.params;
-    const {name, species, age, image} = request.body
+const updatePet = async (req, res, next) => {
+    const {id} = req.params;
+    const {name, species, age, image} = req.body
     try {
         const updatePet = {
             name,
@@ -71,36 +71,36 @@ const updatePet = async (request, response, next) => {
             image
         }
 
-        const foundPetIndex = petsData.findIndex ((pet) => pet.id === id)
+        const foundPetIndex = petsData.findIndex ((pet) => pet._id === id)
         petsData[foundPetIndex] = updatePet
 
-        return response.status (201).json ({
+        return res.status (201).json ({
             success: { message: "The pet is updated"},
             data: {updatePet},
             statusCode: 201,
         })
 
     }catch (error) {
-        return response.status (400).json ({
+        return res.status (400).json ({
             error: { message: "There is an error when updating a pet"},
             statusCode: 400,
         })
     }
 }
 
-const deletePet = async (request, response, next) => {
-    const {id} = request.params
+const deletePet = async (req, res, next) => {
+    const {id} = req.params
 
     try{
         const eraser = petsData.filter((pet) => pet.id !== id)
         console.log(eraser)
 
-        return response.status(200).json ({
+        return res.status(200).json ({
             success: {message: "pet deleted"} ,
             statusCode: 200,
         })
     } catch (error) {
-        return response.status (400).json ({
+        return res.status (400).json ({
             error: {message: "There is an error when deleting a pet"},
             statusCode: 400,
         })
