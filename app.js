@@ -11,6 +11,8 @@ const helmet = require ("helmet")
 const path = require ("node:path")
 
 const petRoutes = require ("./routes/petRoutes")
+const authRoutes = require ("./routes/authRoutes")
+
 
 app.use(express.json());
 
@@ -34,6 +36,8 @@ app.get ("/", (request, response, next) => {
 
 
 app.use("/api/pets", petRoutes);
+app.use("/auth", authRoutes)
+
 
 
 app.listen (PORT, () => {
