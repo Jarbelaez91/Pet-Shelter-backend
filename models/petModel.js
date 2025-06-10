@@ -2,7 +2,7 @@ const mongoose = require ("mongoose")
 
 const {Schema} = mongoose
 
-const petSchema = Schema ({
+const petSchema = new Schema ({
     name: {
         type: String,
         required: true,
@@ -18,10 +18,9 @@ const petSchema = Schema ({
     age:{
         type: Number,
         required: true,
-        trim: true,
     },
 
-    imgage:{
+    image:{
         type:String,
     }
 
