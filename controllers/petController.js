@@ -46,12 +46,12 @@ const createPet = async (req,res,next) => {
             throw new Error ("missing required fields, please review")
     }
 
-    const newPet = {
+    const newPet = new Pet({
         name,
         species,
         age,
         image
-    }
+    })
     await newPet.save()
     
     return res.status(201).json ({
@@ -72,12 +72,12 @@ const updatePet = async (req, res, next) => {
 
     try {
 
-        if (!name, species,age){
+        if (!name|| !species || !age) {
             throw new Error ("missing required fields")
         }
 
-        const updatePet = await Pet.findByIdAndUpdate
-        id,(
+        const updatePet = await Pet.findByIdAndUpdate(
+        id,
             {
                 $set:{
             name,
@@ -92,10 +92,10 @@ const updatePet = async (req, res, next) => {
             throw new Error ("pet not found")
         }
 
-        return res.status (201).json ({
+        return res.status (200).json ({
             success: { message: "The pet is updated"},
             data: {updatePet},
-            statusCode: 201,
+            statusCode: 200,
         })
 
     }catch (error) {

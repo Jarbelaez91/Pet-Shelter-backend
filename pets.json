@@ -1,0 +1,79 @@
+[
+  {
+    "_id": 1,
+    "name": "Hopper",
+    "species": "Rabbit",
+    "age": "2 years old",
+    "image": "/images/hopper.jpeg"
+  },
+  {
+    "_id": 2,
+    "name": "Max",
+    "species": "Dog",
+    "age": "3 years old",
+    "image": "../images/max.jpeg"
+  },
+  {
+    "_id": 3,
+    "name": "Whiskers",
+    "species": "Cat",
+    "age": "4 years old",
+    "image": "../images/whiskers.jpeg"
+  },
+  {
+    "_id": 4,
+    "name": "Sunny",
+    "species": "Bird",
+    "age": "1 year old",
+    "image": "../images/sunny.jpeg"
+  },
+  {
+    "_id": 5,
+    "name": "Lebron",
+    "species": "Goat",
+    "age": "5 years old",
+    "image": "../images/lebron.jpeg"
+  },
+  {
+    "_id": 6,
+    "name": "Lizzy",
+    "species": "Lizard",
+    "age": "2 years old",
+    "image": "../images/lizzy.jpeg"
+  },
+  {
+    "_id": 7,
+    "name": "Daisy",
+    "species": "Cow",
+    "age": "3 years old",
+    "image": "../images/daisy.jpeg"
+  },
+  {
+    "_id": 8,
+    "name": "Benny",
+    "species": "Dog",
+    "age": "6 years old",
+    "image": "../images/benny.jpeg"
+  },
+  {
+    "_id": 9,
+    "name": "Shadow",
+    "species": "Cat",
+    "age": "3 years old",
+    "image": "../images/shadow.jpeg"
+  },
+  {
+    "_id": 10,
+    "name": "Henry",
+    "species": "Horse",
+    "age": "2 years old",
+    "image": "../images/henry.jpeg"
+  },
+  {
+    "_id": 11,
+    "name": "Kiwi",
+    "species": "Parrot",
+    "age": "4 years old",
+    "image": "../images/kiwi.jpeg"
+  }
+]
