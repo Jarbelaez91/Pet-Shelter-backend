@@ -1,5 +1,8 @@
 require("dotenv").config(); 
+
 require("./config/connection");
+
+require("./config/authStrategy")
 
 const express = require("express");
 
@@ -24,7 +27,7 @@ const authRoutes = require ("./routes/authRoutes")
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-const PORT = 8080
+const PORT = process.env.PORT || 8080
 
 app.use (cors())
 app.use (morgan("combined"))
@@ -41,6 +44,45 @@ app.get ("/", (request, response, next) => {
 
 app.use("/api/pets", petRoutes);
 app.use("/auth", authRoutes)
+
+app.use(
+    session({
+        resave: false,
+        saveUninitialized: false,
+        secret: process.env.SECRET_KEY,
+
+        cookie:{
+            httpOnly: true,
+            secure: false,
+            maxAge: 1000 * 60 * 60 *24,
+        }
+    })
+)
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+
+app.use((error, req, res, next) => {
+    let condition = error.code === 11000
+
+    console.log(condition)
+
+    if (condition) {
+      return res.status(error.status || 400).json({
+        error: {message: "Error detected!!!"},
+        statusCode: error.status || 400,
+        })
+        
+    } else {
+        console.log("We passed the error handling middleware, you're good to go")
+    }
+
+    return res.status(error.status || 500).json({
+      error: {message: error.message || "Internal server error, oh no!"},
+      statusCode: error.status || 500
+    })
+})
 
 
 
