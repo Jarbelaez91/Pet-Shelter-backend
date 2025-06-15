@@ -10,7 +10,10 @@ const app = express()
 
 app.use(express.json());
 
-app.use(express.urlencoded({ extended: true }));
+app.use (cors())
+app.use (morgan("combined"))
+app.use (helmet({contentSecurityPolicy:false}))
+
 
 const cors = require ("cors")
 
@@ -20,18 +23,18 @@ const helmet = require ("helmet")
 
 const path = require ("node:path")
 
-const petRoutes = require ("./routes/petRoutes")
-const authRoutes = require ("./routes/authRoutes")
 
+
+app.use(express.urlencoded({ extended: true }));
 
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 const PORT = process.env.PORT || 8080
 
-app.use (cors())
-app.use (morgan("combined"))
-app.use (helmet())
+const petRoutes = require ("./routes/petRoutes")
+const authRoutes = require ("./routes/authRoutes")
+
 
 app.get ("/", (request, response, next) => {
     response.status (200).json ({
@@ -42,15 +45,13 @@ app.get ("/", (request, response, next) => {
 
 
 
-app.use("/api/pets", petRoutes);
-app.use("/auth", authRoutes)
 
 app.use(
     session({
         resave: false,
         saveUninitialized: false,
         secret: process.env.SECRET_KEY,
-
+        
         cookie:{
             httpOnly: true,
             secure: false,
@@ -62,6 +63,8 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
+app.use("/api/pets", petRoutes);
+app.use("/auth", authRoutes)
 
 app.use((error, req, res, next) => {
     let condition = error.code === 11000
