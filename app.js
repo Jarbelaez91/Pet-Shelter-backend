@@ -6,15 +6,6 @@ require("./config/authStrategy")
 
 const express = require("express");
 
-const app = express()
-
-app.use(express.json());
-
-app.use (cors())
-app.use (morgan("combined"))
-app.use (helmet({contentSecurityPolicy:false}))
-
-
 const cors = require ("cors")
 
 const morgan = require ("morgan")
@@ -23,7 +14,20 @@ const helmet = require ("helmet")
 
 const path = require ("node:path")
 
+const mongoose =require("mongoose")
+const session = require("express-session")
+const passport = require("passport")
 
+
+const app = express()
+
+app.use(express.json());
+
+app.use (helmet({contentSecurityPolicy:false}))
+app.use (cors({credentials: true, origin: true}))
+app.use (morgan("combined"))
+
+app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 

@@ -92,10 +92,10 @@ const updatePet = async (req, res, next) => {
             throw new Error ("pet not found")
         }
 
-        return res.status (200).json ({
+        return res.status (201).json ({
             success: { message: "The pet is updated"},
             data: {updatePet},
-            statusCode: 200,
+            statusCode: 201,
         })
 
     }catch (error) {
