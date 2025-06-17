@@ -38,7 +38,7 @@ passport.use(
     {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/auth/google/callback",
+callbackURL: "http://localhost:8080/auth/google/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
@@ -67,7 +67,7 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  done(null, user._id);
 });
 
 passport.deserializeUser(async (id, done) => {
