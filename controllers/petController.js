@@ -67,41 +67,33 @@ const createPet = async (req,res,next) => {
 
 
 const updatePet = async (req, res, next) => {
-    const {id} = req.params;
-    const {name, species, age, image} = req.body
+  const { id } = req.params;
+  const { age } = req.body;
+  
 
-    try {
+  console.log('BODY RECEIVED:', req.body);
 
-        if (!name|| !species || !age) {
-            throw new Error ("missing required fields")
-        }
+  try {
+    const updatePet = await Pet.findByIdAndUpdate(
+      id,
+      { $set: { age } },
+      { new: true }
+    );
 
-        const updatePet = await Pet.findByIdAndUpdate(
-        id,
-            {
-                $set:{
-            name,
-            species,
-            age,
-            image
-        }
-    },
-    {new: true}
-        )
-         if (!updatePet){
-            throw new Error ("pet not found")
-        }
-
-        return res.status (201).json ({
-            success: { message: "The pet is updated"},
-            data: {updatePet},
-            statusCode: 201,
-        })
-
-    }catch (error) {
-        return next (error)
+    if (!updatePet) {
+      throw new Error("pet not found");
     }
-}
+
+    return res.status(201).json({
+      success: { message: "The pet is updated" },
+      data: { updatePet },
+      statusCode: 201,
+    });
+
+  } catch (error) {
+    return next(error);
+  }
+};
 
 const deletePet = async (req, res, next) => {
     const {id} = req.params
@@ -114,7 +106,7 @@ const deletePet = async (req, res, next) => {
         await Pet.findByIdAndDelete(id)
 
         return res.status(200).json ({
-            success: {message: "book deleted"} ,
+            success: {message: "pet deleted"} ,
             statusCode: 200,
         })
     } catch (error) {

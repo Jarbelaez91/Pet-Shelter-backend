@@ -27,7 +27,6 @@ app.use (helmet({contentSecurityPolicy:false}))
 app.use (cors({credentials: true, origin: true}))
 app.use (morgan("combined"))
 
-app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
