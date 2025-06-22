@@ -6,6 +6,10 @@ const passport = require("passport")
 
 const { signupRequest, login, logoutRequest, localLogin } = require("../controllers/authController");
 
+router.get ("/", (request, response, next)=>{
+    return response.json ("auth routing intialized")
+})
+
 router.post("/signupRequest", signupRequest)
 
 router.post ("/login",
